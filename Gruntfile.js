@@ -7,7 +7,8 @@ module.exports = function (grunt) {
     buildDate: grunt.template.today('yyyy-mm-dd HH:MM:ss Z'),
     meta: {
       banner: '/**\n' +
-        ' * <%= pkg.description %>\n\n' +
+        ' * <%= pkg.description %>\n' +
+        ' *\n' +
         ' * @version v<%= pkg.version %>\n' +
         ' * @date <%= buildDate %>\n' +
         ' * @link <%= pkg.homepage %>\n' +
