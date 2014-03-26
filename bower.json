@@ -24,7 +24,8 @@
     "bower_components",
     "lib",
     "test",
-    "src"
+    "src",
+    "Gruntfile.js"
   ],
   "dependencies": {
     "angular": "~1.2.14"
