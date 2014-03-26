@@ -1,0 +1,32 @@
+{
+  "name": "angular-websockert",
+  "description": "A websocket provider for angular",
+  "version": "0.1.0",
+  "license": "GNU GPL v2",
+  "authors": [
+    "Anthony Moutte <instabledesign@gmail.com>",
+    "Styvo (https://github.com/FullMoonIssue)"
+  ],
+  "main": "dist/angular-websocket",
+  "keywords": [
+    "angular",
+    "websocket",
+    "provider"
+  ],
+  "homepage": "https://github.com/instabledesign/angular-websocket",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/instabledesign/angular-websocket"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test"
+  ],
+  "dependencies": {
+    "angular": "~1.2.14",
+    "qunit": "~1.14.0"
+  }
+}
