@@ -23,7 +23,7 @@ Take a look at the associated file for more information.
 
 # Use
 
-[Demo (jsfiddle)](http://jsfiddle.net/yZVu2/)
+[Demo (jsfiddle)](http://jsfiddle.net/XfUY3/)
 
 Include angular and the angular-websocket and optionnaly angular-websocket-log (for debug message)
 
