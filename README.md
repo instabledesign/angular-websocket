@@ -5,14 +5,12 @@ A simple websocket provider for angular
 
 # Authors
 
-Team AOS :
-
 * [Anthony Moutte](https://github.com/instabledesign)
 * [Styvo](https://github.com/FullMoonIssue)
 
 # Requirements
 
-* Anglar
+* Angular
 * [Browser using WebSockets](http://caniuse.com/websockets)
 
 # Licence
