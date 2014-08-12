@@ -21,8 +21,6 @@ Take a look at the associated file for more information.
 
 # Use
 
-[Demo (jsfiddle)](http://jsfiddle.net/XfUY3/)
-
 Include angular and the angular-websocket and optionnaly angular-websocket-log (for debug message)
 
 ```html
@@ -32,19 +30,22 @@ Include angular and the angular-websocket and optionnaly angular-websocket-log (
 
 ```javascript
 var myApp = angular.module('myApp', ['websocket'])
-    .config(['$websocketProvider',
-        function ($websocketProvider) {
-            // Configuration of the $websocketProvider
-            $websocketProvider.path = 'ws://echo.websocket.org';
-        }
-    ])
-    .controller('MyCtrl', function ($rootScope, $scope, $websocket) {
-        $rootScope.$on('websocket.connected', function () {
-            $websocket.request({content: 'Hello from websocket'}).then(
-                function (response) {
-                    $scope.response = response;
-                }
-            );
+        .config(['$websocketProvider',
+            function ($websocketProvider) {
+                // Configuration of the $websocketProvider
+                $websocketProvider.path = 'ws://echo.websocket.org';
+            }
+        ])
+        .controller('MyCtrl', function ($rootScope, $scope, $websocket) {
+            $scope.response = 'Chargement en cours...';
+
+            $rootScope.$on('websocket.open', function () {
+                $websocket.send("Hello from websocket");
+            });
+
+            $rootScope.$on('websocket.message', function (event, origEvent) {
+                $scope.response = origEvent.data;
+                $scope.$apply();
+            });
         });
-    });
 ```

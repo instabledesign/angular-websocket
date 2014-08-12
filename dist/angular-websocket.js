@@ -5,18 +5,16 @@
  * Provider $websocket
  * Establish a connection to a websocket
  *
- * @event websocket.connected When the connection is ready
- * @event websocket.closed When the connection is closed
+ * @event websocket.open When the connection is ready
+ * @event websocket.close When the connection is closed
  * @event websocket.message When a message occurs
- * @event websocket.{method} When a message occurs
  * @event websocket.error When a error occurs
- * @event websocket.send When a request is send
+ * @event websocket.send When a data is send
  */
 var websocketModule = angular
     .module('websocket', [])
-    .constant('JSONRPC_VERSION', '2.0')
-    .provider('$websocket', ['JSONRPC_VERSION',
-        function (JSONRPC_VERSION) {
+    .provider('$websocket', [
+        function () {
             var _this = this;
 
             // Websocket path connection
@@ -27,22 +25,8 @@ var websocketModule = angular
              *
              * @return $websocket The websocket provider
              */
-            _this.$get = ['$rootScope', '$q',
-                function ($rootScope, $q) {
-
-                    /**
-                     * Contain all request sended
-                     *
-                     * @type Object
-                     */
-                    _this.requestSended = {};
-
-                    /**
-                     * Request identifier
-                     *
-                     * @type Integer
-                     */
-                    _this.request_id = 0;
+            _this.$get = ['$rootScope',
+                function ($rootScope) {
 
                     /**
                      * Connection to the websocket
@@ -55,7 +39,7 @@ var websocketModule = angular
                      * @event websocket.connected
                      */
                     connection.onopen = function (event) {
-                        $rootScope.$emit('websocket.connected', event);
+                        $rootScope.$emit('websocket.open', event);
                     };
 
                     /**
@@ -64,29 +48,16 @@ var websocketModule = angular
                      * @event websocket.closed
                      */
                     connection.onclose = function (event) {
-                        $rootScope.$emit('websocket.closed', event);
+                        $rootScope.$emit('websocket.close', event);
                     };
 
                     /**
                      * When a message occurs
                      *
                      * @event websocket.message When a message occurs
-                     * @event websocket.{method} When a message occurs
                      */
                     connection.onmessage = function (event) {
-
-                        var data = JSON.parse(event.data);
-
-                        // Message was response if the data contain an id
-                        if (_this.requestSended.hasOwnProperty(data.id)) {
-                            var defer = _this.requestSended[data.id].defer,
-                                callback = (data.error ? defer.reject(data.error) : defer.resolve(data));
-
-                            $rootScope.$apply(callback);
-                        }
-
-                        $rootScope.$emit('websocket.' + data.method, data);
-                        $rootScope.$emit('websocket.message', data);
+                        $rootScope.$emit('websocket.message', event);
                     };
 
                     /**
@@ -96,16 +67,6 @@ var websocketModule = angular
                      */
                     connection.onerror = function (event) {
                         $rootScope.$emit('websocket.error', event);
-                    };
-
-                    /**
-                     * When a request is send
-                     *
-                     * @event websocket.send When a request is send
-                     */
-                    connection.toSend = function (request) {
-                        connection.send(JSON.stringify(request));
-                        $rootScope.$emit('websocket.send', request);
                     };
 
                     /**
@@ -120,27 +81,11 @@ var websocketModule = angular
                     /**
                      * Do a request throught the connection
                      *
-                     * @param request
-                     *
-                     * @returns {promise}
+                     * @param data
                      */
-                    _this.request = function (request) {
-                        var defer = $q.defer();
-
-                        ++_this.request_id;
-
-                        _this.requestSended[_this.request_id] = {
-                            defer  : defer,
-                            request: request,
-                            time   : new Date()
-                        };
-
-                        request.id = _this.request_id;
-                        request.jsonrpc = JSONRPC_VERSION;
-
-                        connection.toSend(request);
-
-                        return defer.promise;
+                    _this.send = function (data) {
+                        connection.send(data);
+                        $rootScope.$emit('websocket.send', data);
                     };
 
                     /**

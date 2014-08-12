@@ -26,7 +26,7 @@ websocketModule
                         connectionOnclose = $delegate.getConnection().onclose,
                         connectionOnmessage = $delegate.getConnection().onmessage,
                         connectionOnerror = $delegate.getConnection().onerror,
-                        connectionToSend = $delegate.getConnection().toSend;
+                        connectionSend = $delegate.send;
 
                     /**
                      * Show the current time
@@ -78,7 +78,7 @@ websocketModule
                             CssImage.replace('%url%', GifHeader + ImageMessageReceived),
                             '',
                             printTime(),
-                            JSON.parse(args[0].data),
+                            args[0].data,
                             $delegate.path
                         );
 
@@ -102,7 +102,7 @@ websocketModule
                     /**
                      * Add log on toSend
                      */
-                    $delegate.getConnection().toSend = function () {
+                    $delegate.send = function () {
                         var args = [].slice.call(arguments);
 
                         $log.log(
@@ -114,7 +114,7 @@ websocketModule
                             $delegate.path
                         );
 
-                        connectionToSend.apply(null, args);
+                        connectionSend.apply(null, args);
                     };
 
                     return $delegate;
