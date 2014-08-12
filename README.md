@@ -37,7 +37,7 @@ var myApp = angular.module('myApp', ['websocket'])
             }
         ])
         .controller('MyCtrl', function ($rootScope, $scope, $websocket) {
-            $scope.response = 'Chargement en cours...';
+            $scope.response = 'Loading...';
 
             $rootScope.$on('websocket.open', function () {
                 $websocket.send("Hello from websocket");
