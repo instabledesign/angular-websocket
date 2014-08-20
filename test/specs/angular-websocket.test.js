@@ -10,7 +10,7 @@ var myApp = angular.module('myApp', ['websocket'])
 var injector;
 
 module('WEBSOCKET', {
-    setup: function () {
+    setup   : function () {
         injector = angular.injector(['ng', 'myApp']);
     },
     teardown: function () {

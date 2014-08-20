@@ -5,7 +5,7 @@
  * Decorator for provider $websocket
  * Mainly, log message before any onXYZ WebSocket's method
  */
-websocketModule
+angular.module('websocket')
     .constant('CssImage', 'background: url(%url%) 0 0; background-size: contain; font-size: 15px;')
     .constant('GifHeader', 'data:image/gif;base64,R0lGODlhFAAUAPABAAAAAAAAACH/C1hNUCBEYXRhWE1QAz94cAAh+QQFAAABACwAAAAAFAAUA')
     .constant('ImageClose', 'AACNYyPeQCKDANszsxLFZ7VbtZJH9iNWQKOqJhui8tGHibGD82Rr1mZJ6oK8XpBx5BI4Qh/oUMBADs=')

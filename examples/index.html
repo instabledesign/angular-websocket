@@ -6,30 +6,30 @@
     <script type="text/javascript" src="../src/angular-websocket.js"></script>
     <script type="text/javascript" src="../src/angular-websocket-log.js"></script>
     <script type="application/javascript">
-    var myApp = angular.module('myApp', ['websocket'])
-            .config(['$websocketProvider',
-                function ($websocketProvider) {
-                    // Configuration of the $websocketProvider
-                    $websocketProvider.path = 'ws://echo.websocket.org';
-                }
-            ])
-            .controller('MyCtrl', function ($rootScope, $scope, $websocket) {
-                $scope.response = 'Chargement en cours...';
+        var myApp = angular.module('myApp', ['websocket'])
+                .config(['$websocketProvider',
+                    function ($websocketProvider) {
+                        // Configuration of the $websocketProvider
+                        $websocketProvider.path = 'ws://echo.websocket.org';
+                    }
+                ])
+                .controller('MyCtrl', function ($rootScope, $scope, $websocket) {
+                    $scope.response = 'Chargement en cours...';
 
-                $rootScope.$on('websocket.open', function () {
-                    $websocket.send("Hello from websocket");
-                });
+                    $rootScope.$on('websocket.open', function () {
+                        $websocket.send("Hello from websocket");
+                    });
 
-                $rootScope.$on('websocket.message', function (event, origEvent) {
-                    $scope.response = origEvent.data;
-                    $scope.$apply();
+                    $rootScope.$on('websocket.message', function (event, origEvent) {
+                        $scope.response = origEvent.data;
+                        $scope.$apply();
+                    });
                 });
-            });
     </script>
 </head>
 <body>
-    <div data-ng-app="myApp">
-        <div data-ng-controller="MyCtrl">{{ response }}</div>
-    </div>
+<div data-ng-app="myApp">
+    <div data-ng-controller="MyCtrl">{{ response }}</div>
+</div>
 </body>
 </html>

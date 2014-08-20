@@ -11,8 +11,7 @@
  * @event websocket.error When a error occurs
  * @event websocket.send When a data is send
  */
-var websocketModule = angular
-    .module('websocket', [])
+angular.module('websocket', [])
     .provider('$websocket', [
         function () {
             var _this = this;
