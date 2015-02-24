@@ -27,6 +27,15 @@ angular.module('websocket', [])
             _this.$get = ['$rootScope',
                 function ($rootScope) {
 
+                    if (_this.path == null) {
+                        throw 'Don\'t forget to configure your websocket path like \n angular.module(\'app\', [\'websocket\'])\n' +
+                        '   .config([\'$websocketProvider\',\n' +
+                        '       function ($websocketProvider) {\n' +
+                        '           $websocketProvider.path = \'ws://localhost:9090\';\n' +
+                        '       }\n' +
+                        '   ]);\n';
+                    }
+
                     /**
                      * Connection to the websocket
                      */

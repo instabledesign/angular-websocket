@@ -1,7 +1,7 @@
 {
     "name"           : "angular-websocket",
     "description"    : "A websocket provider for angular",
-    "version"        : "1.0.1",
+    "version"        : "1.0.2",
     "license"        : "GNU GPL v2",
     "authors"        : [
         "Anthony Moutte <instabledesign@gmail.com>",
@@ -29,7 +29,7 @@
         "examples"
     ],
     "dependencies"   : {
-        "angular": "~1.2.14"
+        "angular": "~1.3"
     },
     "devDependencies": {
         "qunit": "~1.14.0"
